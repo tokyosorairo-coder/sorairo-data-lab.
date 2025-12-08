@@ -1,5 +1,5 @@
 // ▼▼ CSV読み込み ▼▼
-fetch("data.csv") 
+fetch("csv/data.csv") 
   .then(res => res.text())
   .then(text => {
     const rows = text.trim().split("\n").map(row => row.split(","));
