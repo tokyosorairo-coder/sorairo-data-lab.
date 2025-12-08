@@ -1,43 +1,27 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Sorairo Data Lab</title>
-
-  <!-- 外部CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
 <body>
+  <div class="container">
 
-  <h1 class="title">Sorairo Data Lab</h1>
+    <h1>Sorairo Data Lab</h1>
 
-  <!-- ▼ メンバー選択 ---------------------------- -->
-  <div class="selectArea">
-    <label for="memberSelect">メンバー：</label>
     <select id="memberSelect"></select>
+
+    <div id="mainStats">
+      <div>選抜回数：<span id="senbatsuCount"></span></div>
+      <div>出演回数：<span id="stageCount"></span></div>
+      <div>ブログ更新数：<span id="blogCount"></span></div>
+    </div>
+
+    <ul class="tabs">
+      <li><a class="currentTab" data-tab="#tabOverview">概要</a></li>
+      <li><a data-tab="#tabHistory">出演履歴</a></li>
+      <li><a data-tab="#tabBlog">ブログ</a></li>
+    </ul>
+
+    <div id="tabOverview" class="tabContent active">概要エリア</div>
+    <div id="tabHistory" class="tabContent">出演データ</div>
+    <div id="tabBlog" class="tabContent">ブログ関連</div>
+
   </div>
 
-  <!-- ▼ メイン統計 ---------------------------- -->
-  <div id="mainStats" class="statsBox">
-    <div class="statItem">選抜回数：<span id="senbatsuCount">0</span></div>
-    <div class="statItem">出演回数：<span id="stageCount">0</span></div>
-    <div class="statItem">ブログ更新数：<span id="blogCount">0</span></div>
-  </div>
-
-  <!-- ▼ タブメニュー ---------------------------- -->
-  <ul class="tabs">
-    <li><a class="currentTab" data-tab="#tabOverview">概要</a></li>
-    <li><a data-tab="#tabHistory">出演履歴</a></li>
-    <li><a data-tab="#tabBlog">ブログ</a></li>
-  </ul>
-
-  <!-- ▼ タブ内容 ---------------------------- -->
-  <div id="tabOverview" class="tabContent active">概要エリア</div>
-  <div id="tabHistory" class="tabContent">出演データをここに表示</div>
-  <div id="tabBlog" class="tabContent">ブログ関連の内容</div>
-
-  <!-- ▼ 外部JS ---------------------------- -->
   <script src="script.js"></script>
-
 </body>
-</html>
