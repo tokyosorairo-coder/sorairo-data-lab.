@@ -6,8 +6,6 @@ fetch("csv/stage.csv")
     processCSV(rows);
   });
 
-
-
 // ▼▼ プルダウン生成 ▼▼
 function processCSV(rows) {
   // A列＝イベント名 → メンバーは1列目以降
