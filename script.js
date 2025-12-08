@@ -1,34 +1,11 @@
 // ▼▼ CSV読み込み ▼▼
-fetch("csv/data.csv")
+fetch("csv/stage.csv")
   .then(res => res.text())
   .then(text => {
-
-    // BOM除去
-    text = text.replace(/^\uFEFF/, "");
-
-    // 行ごとに処理して「列数を揃える」CSVパーサー
-    const lines = text.trim().split("\n");
-
-    // 最初の行（ヘッダー）の列数を基準にする
-    const header = lines[0].split(",");
-    const colCount = header.length;
-
-    const rows = lines.map(line => {
-      let cols = line.split(",");
-
-      // 列が不足 → 空白を追加
-      while (cols.length < colCount) {
-        cols.push("");
-      }
-      // 列が多い → 余分を捨てる
-      if (cols.length > colCount) {
-        cols = cols.slice(0, colCount);
-      }
-      return cols.map(c => c.trim());
-    });
-
+    const rows = text.trim().split("\n").map(row => row.split(","));
     processCSV(rows);
   });
+
 
 
 // ▼▼ プルダウン生成 ▼▼
