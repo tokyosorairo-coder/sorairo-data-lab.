@@ -8,46 +8,36 @@ fetch("csv/stage.csv")
 
 // ▼▼ プルダウン生成 ▼▼
 function processCSV(rows) {
-  // A列＝イベント名 → メンバーは1列目以降
-  const members = rows[0].slice(1);
-
+  const members = rows[0].slice(1);   // 1行目（ヘッダー）の A列以外がメンバー名
   const memberSelect = document.getElementById("memberSelect");
-  memberSelect.innerHTML = "";
 
-  members.forEach(name => {
+  // メンバー追加
+  members.forEach(m => {
     const opt = document.createElement("option");
-    opt.value = name;
-    opt.textContent = name;
+    opt.value = m;
+    opt.textContent = m;
     memberSelect.appendChild(opt);
   });
 
-  // 何も表示されないとき用の安全対策
-  if (members.length === 0) {
-    console.error("メンバー名が取得できなかったニダ… CSVの列ズレが激しい可能性があるニダ。");
-    return;
-  }
-
+  // メンバー変更時
   memberSelect.addEventListener("change", () => {
     updateDisplay(memberSelect.value, rows);
   });
 
+  // 初期表示
   updateDisplay(members[0], rows);
 }
 
-
-// ▼▼ 出演回数の計算 ▼▼
+// ▼▼ 表示更新（出演回数の計算） ▼▼
 function updateDisplay(member, rows) {
+  let stageCount = 0;
   const col = rows[0].indexOf(member);
 
-  let stageCount = 0;
-
   for (let i = 1; i < rows.length; i++) {
-    const val = rows[i][col];
+    const val = rows[i][col]?.trim();
 
-    // ✕ → 欠席 → ノーカウント
-    // ─ → 非対象 → ノーカウント
-    // ""（空白） → 出演 → カウント
-    if (val !== "✕" && val !== "─") {
+    // 空白 = 出演
+    if (val === "") {
       stageCount++;
     }
   }
@@ -55,8 +45,7 @@ function updateDisplay(member, rows) {
   document.getElementById("stageCount").textContent = stageCount;
 }
 
-
-// ▼▼ タブ切り替え ▼▼
+// ▼▼ タブ切替 ▼▼
 document.querySelectorAll(".tabs a").forEach(tab => {
   tab.addEventListener("click", () => {
 
