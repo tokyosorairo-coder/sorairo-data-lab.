@@ -1,46 +1,50 @@
 // ▼▼ CSV読み込み ▼▼
-fetch("csv/data.csv") 
+fetch("csv/data.csv")
   .then(res => res.text())
   .then(text => {
-    const rows = text.trim().split("\n").map(row => row.split(","));
+    const rows = text
+      .trim()
+      .split("\n")
+      .map(row => row.split(","));
     processCSV(rows);
   });
 
 
 // ▼▼ プルダウン生成 ▼▼
 function processCSV(rows) {
-  const members = rows[0].slice(1);   // 1行目（ヘッダー）の A列以外がメンバー名
+  const members = rows[0].slice(1); // A列以外がメンバー名
   const memberSelect = document.getElementById("memberSelect");
 
-  // メンバー追加
-  members.forEach(m => {
+  members.forEach(name => {
     const opt = document.createElement("option");
-    opt.value = m;
-    opt.textContent = m;
+    opt.value = name;
+    opt.textContent = name;
     memberSelect.appendChild(opt);
   });
 
-  // メンバー変更時
   memberSelect.addEventListener("change", () => {
     updateDisplay(memberSelect.value, rows);
   });
 
-  // 初期表示
-  updateDisplay(members[0], rows);
+  updateDisplay(members[0], rows); // 初期表示
 }
 
 
 // ▼▼ 表示更新（出演回数の計算） ▼▼
 function updateDisplay(member, rows) {
   let stageCount = 0;
-  const col = rows[0].indexOf(member); // メンバーの列番号を取得
+
+  // メンバーの列番号
+  const col = rows[0].indexOf(member);
 
   for (let i = 1; i < rows.length; i++) {
-    const val = rows[i][col]?.trim();  // 空白 or ✕ or ─
+    const raw = rows[i][col];
+    const val = raw ? raw.trim() : "";
 
-    // ★ ここが重要 ★
-    // 「空白 = 出演」をカウントする
-    if (val === "") {
+    // ✕ = 欠席 → カウントしない
+    // ─ = そもそも対象外 → カウントしない
+    // それ以外（空白含む）は出演としてカウント
+    if (val !== "✕" && val !== "─") {
       stageCount++;
     }
   }
@@ -52,7 +56,6 @@ function updateDisplay(member, rows) {
 // ▼▼ タブ切替 ▼▼
 document.querySelectorAll(".tabs a").forEach(tab => {
   tab.addEventListener("click", () => {
-
     document.querySelectorAll(".tabs a")
       .forEach(t => t.classList.remove("currentTab"));
     tab.classList.add("currentTab");
