@@ -1,2 +1,102 @@
-<h1>Sorairo Data Lab ニダ！</h1>
-<p>ここから動くページが始まるニダ。</p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Sorairo Data Lab</title>
+<style>
+body {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    background: #f3f6ff;
+    padding: 20px;
+}
+label, select {
+    font-size: 18px;
+}
+.result-box {
+    margin-top: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 18px;
+}
+</style>
+</head>
+<body>
+
+<h1>Sorairo Data Lab</h1>
+<p>出演回数チェッカー（CSV自動連動）</p>
+
+<label for="memberSelect">メンバーを選んでください：</label>
+<select id="memberSelect">
+    <option value="">読み込み中ニダ...</option>
+</select>
+
+<div id="result" class="result-box">
+    メンバーを選択すると出演回数が表示されるニダ
+</div>
+
+<script>
+// ★ CSV の URL（まるくろのスプシ公開CSV）
+const CSV_URL =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vSxXcfXKMw0Kdwa6Kta8chqoj1Y5ovOKAb_bLTqfm_SO0TSiUONq2U22HRGjFP1njxlAGcln0vdbsFx/pub?gid=0&single=true&output=csv";
+
+// HTML要素の参照
+const selectBox = document.getElementById("memberSelect");
+const resultBox = document.getElementById("result");
+
+// CSV取得
+fetch(CSV_URL)
+.then(res => res.text())
+.then(csvText => {
+    console.log("CSV 取得成功ニダ");
+
+    const rows = csvText.trim().split(/\r?\n/).map(r => r.split(","));
+
+    // 1行目 → メンバー名
+    const header = rows[0].map(h => h.trim());
+
+    // index 1 以降がメンバー
+    const members = header.slice(1);
+
+    // プルダウン初期化
+    selectBox.innerHTML = '<option value="">選択してニダ</option>';
+
+    members.forEach(name => {
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        selectBox.appendChild(opt);
+    });
+
+    // 選択時の処理
+    selectBox.addEventListener("change", () => {
+        const name = selectBox.value;
+        if (!name) return;
+
+        const index = header.indexOf(name);
+
+        let count = 0;
+
+        // 2行目以降の出演回数を数える
+        for (let i = 1; i < rows.length; i++) {
+            const cell = rows[i][index] ? rows[i][index].trim() : "";
+            if (cell === "×" || cell === "x" || cell === "X") {
+                count++;
+            }
+        }
+
+        resultBox.innerHTML = `
+            <strong>${name}</strong> の出演回数は  
+            <strong>${count} 回ニダ！</strong>
+        `;
+    });
+})
+.catch(err => {
+    console.error("CSV 読み込みエラー：", err);
+    resultBox.textContent = "CSV の読み込みでエラーが出たニダ";
+});
+</script>
+
+</body>
+</html>
