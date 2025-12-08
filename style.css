@@ -1,32 +1,86 @@
+/* 全体レイアウト */
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
+  font-family: "Noto Sans JP", sans-serif;
+  background: #f6f8fb;
+  color: #333;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
 }
 
+/* コンテナ */
+.container {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* タイトル */
+h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #2a72ff;
+}
+
+/* セレクト */
+#memberSelect {
+  width: 260px;
+  padding: 10px;
+  border: 2px solid #2a72ff;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-bottom: 24px;
+  background: #fff;
+}
+
+/* 主要データカード */
+#mainStats {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+#mainStats div {
+  background: white;
+  border-radius: 8px;
+  padding: 12px 20px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.08);
+  border-left: 4px solid #2a72ff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* タブ */
 .tabs {
   display: flex;
-  gap: 12px;
   list-style: none;
+  gap: 12px;
   padding: 0;
-  margin-top: 20px;
   border-bottom: 2px solid #ddd;
+  margin-bottom: 16px;
 }
 
 .tabs a {
   padding: 8px 16px;
+  color: #666;
+  font-weight: 600;
   text-decoration: none;
-  color: #555;
+  border-radius: 6px 6px 0 0;
 }
 
 .tabs a.currentTab {
-  background: #007bff;
+  background: #2a72ff;
   color: white;
-  border-radius: 4px 4px 0 0;
 }
 
+/* タブ内容 */
 .tabContent {
   display: none;
-  padding: 12px 0;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 3px 10px rgba(0,0,0,0.05);
 }
 
 .tabContent.active {
