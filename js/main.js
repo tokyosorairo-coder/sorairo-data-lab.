@@ -1,26 +1,47 @@
-// 【CMS連携を想定した仮のデータ】
-const newsData = [
-    { id: 1, date: "2025.12.09", category: "MAGAZINE", title: "Webサイト構築、デザイン意図の翻訳が成功！", link: "#" },
-    { id: 2, date: "2025.12.08", category: "TV", title: "柳堀花怜が~ちゃんねるに出演", link: "#" },
-    { id: 3, date: "2025.12.08", category: "RADIO", title: "NHKさいたまのラジオ番組に出演", link: "#" },
-    { id: 4, date: "2025.12.07", category: "NEWS", title: "新しいデータ分析レポートを公開", link: "#" },
-    { id: 5, date: "2025.12.06", category: "MAGAZINE", title: "★これはトップページでは非表示になる記事です", link: "#" } // 5件目
-];
+// MicroCMSとの連携に必要な設定
+// サービスIDとAPIキーは他のJSファイルと共通の値を使用します
+const SERVICE_ID = 'your-service-id'; 
+const API_KEY = 'YOUR_API_KEY_HERE';
+const ENDPOINT = `https://${SERVICE_ID}.microcms.io/api/v1/news`;
+
+// APIから全データを取得する関数 (news_list.jsと共通)
+async function fetchAllNews() {
+    try {
+        const response = await fetch(ENDPOINT, {
+            headers: { 'X-MICROCMS-API-KEY': API_KEY }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const json = await response.json();
+        // 取得したコンテンツ配列（全件）を返す
+        return json.contents; 
+        
+    } catch (error) {
+        console.error("トップページAPIデータの取得中にエラーが発生しました:", error);
+        return []; // エラー時は空の配列を返す
+    }
+}
 
 // HTML要素にニュースを自動で挿入する機能
-function displayNews() {
+async function displayNews() {
     const newsListElement = document.getElementById('news-list');
     if (!newsListElement) return;
+    
+    // APIからデータを取得
+    const allNewsData = await fetchAllNews(); 
 
-    // ★★★ ニュースデータを最初の4件に制限 ★★★
-    const limitedNews = newsData.slice(0, 4); 
+    // ★★★ 取得したニュースデータを最新の4件に制限 ★★★
+    const limitedNews = allNewsData.slice(0, 4); 
 
     // ニュースデータを一つずつ処理し、HTMLを生成
-    limitedNews.forEach(news => { // limitedNews を使用
+    limitedNews.forEach(news => { 
         const listItem = document.createElement('li');
         listItem.classList.add('news-item'); 
-
-        // 詳細ページへのリンク（idを渡す）
+        
+        // CMSのデータにはIDが含まれます
         listItem.innerHTML = `
             <span class="news-date">${news.date}</span>
             <span class="news-category">[${news.category}]</span> 
@@ -33,8 +54,5 @@ function displayNews() {
     });
 }
 
-// ページが完全に読み込まれたら、すべての機能を実行する
-window.onload = function() {
-    displayNews();
-    // 他のトップページ専用のJS機能があればここに追加します
-};
+// ページが読み込まれたらニュースを表示する関数を実行
+window.onload = displayNews;
