@@ -31,6 +31,18 @@ body {
     font-weight: 900;
 }
 
+/* ナビゲーション全体 (News, Data, About, Contactを囲む要素) */
+.nav {
+    /* リンクを横並びにする */
+    display: flex; 
+    
+    /* 必要に応じて、ナビゲーションリストの初期設定のマージンやパディングをリセット */
+    margin: 0;
+    padding: 0;
+    
+    /* 要素間のスペースを均等に広げる場合 */
+    /* justify-content: space-between; */ 
+}
 /* ナビゲーションのリンク */
 .nav a {
     margin-left: 32px;
