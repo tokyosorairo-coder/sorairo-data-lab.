@@ -3,6 +3,19 @@ const SERVICE_ID = 'sdltokyo';
 const API_KEY = 'ezNTmjVFsUfBTMKo6uu6c25lRhvRQ0QaD9vO';
 const ENDPOINT = `https://${SERVICE_ID}.microcms.io/api/v1/news`;
 
+// ★★★ ここに formatMicroCmsDate 関数を定義してください ★★★
+function formatMicroCmsDate(dateString) {
+    if (!dateString) return '';
+    
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}.${month}.${day}`;
+}
+// ★★★ formatMicroCmsDate 関数の定義終わり ★★★
+
 // APIから全データを取得する関数
 async function fetchAllNews() {
     try {
@@ -30,25 +43,12 @@ async function displayAllNews() {
     
     const allNewsData = await fetchAllNews(); 
 
+    // ★★★ 修正箇所: allNewsDataに対する単一のループのみを実行 ★★★
     allNewsData.forEach(news => {
         const listItem = document.createElement('li');
         listItem.classList.add('news-item'); 
-
-        // カテゴリの安全な取得：news.category.category を使用
-        const categoryObject = news.category;
-        let categoryName = '未分類'; 
-        if (categoryObject) {
-             categoryName = categoryObject.category ||   
-                            categoryObject.name ||       
-                            categoryObject.title ||      
-                            '未分類';
-        }
-
-        limitedNews.forEach(news => { 
-        const listItem = document.createElement('li');
-        listItem.classList.add('news-item'); 
         
-        // カテゴリの安全な取得：news.category.category を使用
+        // カテゴリの安全な取得
         const categoryObject = news.category;
         let categoryName = '未分類'; 
         if (categoryObject) {
@@ -58,19 +58,16 @@ async function displayAllNews() {
                             '未分類';
         }
 
+        // 日付フォーマットの適用
         const formattedDate = formatMicroCmsDate(news.date);
 
-listItem.innerHTML = `
-    <span class="news-date">${formattedDate}</span> 
-    <span class="news-category">[${categoryName}]</span> 
-    <span class="news-title">
-        <a href="news_detail.html?id=${news.id}">${news.title}</a>
-    </span>
-`;
-        
-        newsListElement.appendChild(listItem);
-    });
-}
+        listItem.innerHTML = `
+            <span class="news-date">${formattedDate}</span> 
+            <span class="news-category">[${categoryName}]</span> 
+            <span class="news-title">
+                <a href="news_detail.html?id=${news.id}">${news.title}</a>
+            </span>
+        `;
         
         newsListElement.appendChild(listItem);
     });
