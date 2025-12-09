@@ -1,79 +1,37 @@
-/* ============================
-   Sorairo Data Lab.  main.js
-   ----------------------------
-   ・タブ切り替え
-   ・スマホメニュー（必要な場合）
-   ・共通UIの初期化
-=============================== */
+// 【CMS連携を想定した仮のデータ】
+// 実際にはAPI通信でこのデータを取得します
+const newsData = [
+    { date: "2025.12.09", category: "MAGAZINE", title: "Webサイト構築、デザイン意図の翻訳が成功！", link: "#" },
+    { date: "2025.12.08", category: "TV", title: "柳堀花怜が~ちゃんねるに出演", link: "#" },
+    { date: "2025.12.08", category: "RADIO", title: "NHKさいたまのラジオ番組に出演", link: "#" },
+    { date: "2025.12.07", category: "NEWS", title: "新しいデータ分析レポートを公開", link: "#" }
+];
 
-// ▼▼ タブ切り替え（全ページ共通で使える仕様） ▼▼
-document.querySelectorAll("[data-tab]").forEach(tab => {
-  tab.addEventListener("click", () => {
+// HTML要素にニュースを自動で挿入する機能
+function displayNews() {
+    const newsListElement = document.getElementById('news-list');
+    if (!newsListElement) return;
 
-    const target = tab.dataset.tab;
+    // ニュースデータを一つずつ処理し、HTMLを生成
+    newsData.forEach(news => {
+        const listItem = document.createElement('li');
+        listItem.classList.add('news-item'); 
 
-    // タブボタンの状態を更新
-    document.querySelectorAll("[data-tab]")
-      .forEach(t => t.classList.remove("currentTab"));
-    tab.classList.add("currentTab");
-
-    // タブコンテンツを更新
-    document.querySelectorAll(".tabContent")
-      .forEach(c => c.classList.remove("active"));
-
-    document.querySelector(target).classList.add("active");
-  });
-});
-
-
-// ▼▼ メニュー（必要になった時用のテンプレ） ▼▼
-const menuBtn = document.querySelector("#menuBtn");
-const nav = document.querySelector("nav");
-
-if (menuBtn) {
-  menuBtn.addEventListener("click", () => {
-    nav.classList.toggle("open");
-  });
+        // 日付、カテゴリ、タイトルを含むHTMLを組み立てる
+        listItem.innerHTML = `
+            <span class="news-date">${news.date}</span>
+            <span class="news-category">[${news.category}]</span> 
+            <span class="news-title">
+                <a href="${news.link}">${news.title}</a>
+            </span>
+        `;
+        
+        newsListElement.appendChild(listItem);
+    });
 }
 
-
-// ▼▼ ページ読み込み時に動かす処理 ▼▼
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("Sorairo Data Lab. loaded ✔");
-});
-
-// ▼▼ News 自動生成 ▼▼
-fetch("csv/news.csv")
-  .then(res => res.text())
-  .then(text => {
-    const rows = text.trim().split("\n").map(r => r.split(","));
-
-    const header = rows.shift(); // 1行目削除
-    const newsData = rows.map(r => {
-      return {
-        date: r[0],
-        category: r[1],
-        title: r[2],
-        url: r[3] || ""
-      };
-    });
-
-    // ▼ 日付でソート（新しい順）
-    newsData.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    const list = document.getElementById("newsList");
-
-    newsData.forEach(item => {
-      const div = document.createElement("div");
-      div.className = "news-item";
-
-      div.innerHTML = `
-        <div class="news-meta">${item.date}｜${item.category}</div>
-        <div class="news-title">
-          ${item.url ? `<a href="${item.url}">${item.title}</a>` : item.title}
-        </div>
-      `;
-
-      list.appendChild(div);
-    });
-  });
+// ページが完全に読み込まれたら、すべての機能を実行する
+window.onload = function() {
+    displayNews();
+    // 他のトップページ専用のJS機能があればここに追加します
+};
