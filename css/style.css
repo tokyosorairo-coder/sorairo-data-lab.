@@ -1,7 +1,8 @@
 /* 全体設定 */
 body {
     margin: 0;
-    font-family: 'Noto Sans JP', sans-serif;
+    /* ★★★ 修正箇所: フォントを 'Shippori Mincho B1' に変更 ★★★ */
+    font-family: 'Shippori Mincho B1', serif;
     color: #000;
 }
 
