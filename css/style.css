@@ -56,7 +56,8 @@ body {
 .news-inner h2 {
     font-size: 32px;
     font-weight: 800;
-    margin-bottom: 20px;
+    margin-top: 0;
+    margin-bottom: 15px;
 }
 
 .news ul {
