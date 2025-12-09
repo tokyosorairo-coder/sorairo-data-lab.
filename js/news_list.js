@@ -42,7 +42,7 @@ async function displayAllNews() {
         // CMSのデータにはIDが含まれます
         listItem.innerHTML = `
             <span class="news-date">${news.date}</span>
-            <span class="news-category">[${news.category.name}]</span> 
+            <span class="news-category">[${news.category.category}]</span>
             <span class="news-title">
                 <a href="news_detail.html?id=${news.id}">${news.title}</a>
             </span>
