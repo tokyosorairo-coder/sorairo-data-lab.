@@ -37,15 +37,18 @@ function renderArticle(data) {
     const container = document.getElementById('article-container');
     if (!container) return;
 
-    // カテゴリ名を取り出す処理を修正：入れ子構造 (category.category) に対応
-    const categoryName = data.category ? data.category.category : '未分類';
+    // ★★★ カテゴリ名取得のロジックを修正 ★★★
+    // 1. data.category や data.category.category が存在するか安全にチェック (?. を使用)
+    // 2. 存在しない場合は必ず「未分類」を返す (|| '未分類' を使用)
+    const categoryName = data.category?.category || '未分類'; 
 
     // HTMLを組み立てる
     container.innerHTML = `
         <h1 class="article-title">${data.title}</h1>
         <p class="article-meta">
             <span class="article-date">${data.date}</span>
-            <span class="article-category">[${categoryName}]</span>  </p>
+            <span class="article-category">[${categoryName}]</span>  
+        </p>
         <div class="article-body">
             ${data.content}
         </div>
@@ -54,6 +57,8 @@ function renderArticle(data) {
     // ページタイトルも変更
     document.title = `${data.title} | Sorairo Data Lab.`;
 }
+
+// ※ ページ読み込み時に実行される部分は省略しています
 
 // ページ読み込み時に実行
 window.onload = async function() {
