@@ -30,9 +30,9 @@ body {
 }
 
 /* ▼ メインビジュアル */
-.mv {
+.hero {
   width: 100%;
-  height: 400px; /* ← イラレに合わせて後で調整可 */
+  height: 400px;
   background: linear-gradient(#c8e3ff, #a9d2ff);
 }
 
