@@ -5,12 +5,22 @@ body {
   color: #000;
 }
 
-/* ▼ ヘッダー */
+/* ▼ ヘッダーの修正 */
 .header {
   width: 100%;
   background: #fff;
-  padding: 24px 48px;
+  /* ★ 左右のパディングを削除！ 上下のパディングは残す ★ */
+  padding: 24px 0; 
+}
 
+/* ★★★ 新規追加：ヘッダーの中身（.header-inner）の設定 ★★★ */
+.header-inner {
+  /* ニュース欄と同じように、最大幅と中央寄せを設定します */
+  max-width: 1200px; /* デザインに合わせた最大幅 */
+  margin: 0 auto;    /* 中央寄せ */
+  padding: 0 48px;   /* 左右の余白（ロゴとナビを画面端から離す） */
+  
+  /* Flexboxの設定は.header-innerに移動します */
   display: flex;
   justify-content: space-between;
   align-items: center;
