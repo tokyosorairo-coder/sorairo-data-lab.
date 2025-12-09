@@ -1,7 +1,7 @@
 // MicroCMSとの連携に必要な設定
 // 実際には、MicroCMSの管理画面で取得できる値を設定します
-const SERVICE_ID = 'your-service-id'; 
-const API_KEY = 'YOUR_API_KEY_HERE';
+const SERVICE_ID = 'sdltokyo'; 
+const API_KEY = 'ezNTmjVFsUfBTMKo6uu6c25lRhvRQ0QaD9vO';
 const ENDPOINT = `https://${SERVICE_ID}.microcms.io/api/v1/news`;
 
 // APIからデータを取得する関数
