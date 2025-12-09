@@ -38,8 +38,15 @@ async function displayNews() {
         listItem.classList.add('news-item'); 
         
         // カテゴリの安全な取得：news.category.category を使用
-        const categoryName = news.category?.category || news.category?.title || '未分類';
-        
+        const categoryObject = news.category;
+        let categoryName = '未分類'; 
+        if (categoryObject) {
+             categoryName = categoryObject.category ||   
+                            categoryObject.name ||       
+                            categoryObject.title ||      
+                            '未分類';
+        }
+
         listItem.innerHTML = `
             <span class="news-date">${news.date}</span>
             <span class="news-category">[${categoryName}]</span> 
