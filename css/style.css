@@ -1,82 +1,65 @@
-/* フォント設定 */
+/* 全体 */
 body {
   margin: 0;
   font-family: 'Noto Sans JP', sans-serif;
-  font-weight: 500;
-  background: #ffffff;
-  color: #333;
+  color: #000;
 }
 
-.container {
-  width: 90%;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* ヘッダー */
+/* ▼ ヘッダー */
 .header {
-  background: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  padding: 12px 0;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
+  width: 100%;
+  background: #fff;
+  padding: 24px 48px;
 
-.logo {
-  font-family: 'Inter', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.nav a {
-  margin-left: 24px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
-.header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* ヒーローエリア */
-.hero {
-  background: linear-gradient(to bottom right, #d6edff, #b0d6ff);
-  padding: 120px 0;
-  text-align: center;
+.logo {
+  font-size: 28px;
+  font-weight: 900;
 }
 
-.hero-title {
-  font-family: 'Inter', sans-serif;
-  font-size: 56px;
+.nav a {
+  margin-left: 32px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #000;
+}
+
+/* ▼ メインビジュアル */
+.mv {
+  width: 100%;
+  height: 400px; /* ← イラレに合わせて後で調整可 */
+  background: linear-gradient(#c8e3ff, #a9d2ff);
+}
+
+/* ▼ News */
+.news {
+  padding: 60px 48px;
+}
+
+.news h2 {
+  font-size: 36px;
+  margin-bottom: 24px;
+  font-weight: 900;
+}
+
+.news ul {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 
-.hero-sub {
-  font-size: 18px;
-  opacity: 0.8;
+.news li {
+  font-size: 24px;
+  margin-bottom: 12px;
 }
 
-/* NEWS */
-.section-title {
-  font-size: 28px;
-  margin-top: 60px;
-  margin-bottom: 20px;
-}
-
-.news-item {
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-  font-size: 18px;
-}
-
-/* フッター */
+/* ▼ フッター */
 .footer {
-  text-align: center;
-  padding: 40px 0;
-  color: #555;
-  font-family: 'Inter', sans-serif;
+  padding: 40px 48px;
+  font-size: 14px;
 }
