@@ -49,9 +49,10 @@ body {
 
 /* ▼ Newsエリア */
 .news {
-    /* ★★★ 上の余白を減らしました (例: 80px → 30px) ★★★ */
-    padding: 30px;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
 }
+
 .news-inner h2 {
     font-size: 32px;
     font-weight: 800;
