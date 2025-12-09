@@ -1,26 +1,45 @@
-// 【CMS連携を想定した仮のデータ】
-// トップページより多い、全件データと仮定します
-const allNewsData = [
-    { id: 1, date: "2025.12.09", category: "MAGAZINE", title: "Webサイト構築、デザイン意図の翻訳が成功！", link: "#" },
-    { id: 2, date: "2025.12.08", category: "TV", title: "柳堀花怜が~ちゃんねるに出演", link: "#" },
-    { id: 3, date: "2025.12.08", category: "RADIO", title: "NHKさいたまのラジオ番組に出演", link: "#" },
-    { id: 4, date: "2025.12.07", category: "NEWS", title: "新しいデータ分析レポートを公開", link: "#" },
-    { id: 5, date: "2025.12.06", category: "MAGAZINE", title: "これが5件目の記事です。全リストには表示されます。", link: "#" },
-    { id: 6, date: "2025.12.05", category: "OTHER", title: "これが6件目の記事です。", link: "#" },
-    // ... さらに多くのニュース ...
-];
+// MicroCMSとの連携に必要な設定
+// 実際には、MicroCMSの管理画面で取得できる値を設定します
+const SERVICE_ID = 'your-service-id'; 
+const API_KEY = 'YOUR_API_KEY_HERE';
+const ENDPOINT = `https://${SERVICE_ID}.microcms.io/api/v1/news`;
+
+// APIからデータを取得する関数
+async function fetchAllNews() {
+    try {
+        const response = await fetch(ENDPOINT, {
+            headers: { 'X-MICROCMS-API-KEY': API_KEY }
+        });
+        
+        // データの取得に失敗した場合
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const json = await response.json();
+        // 取得したコンテンツ配列（全件）を返す
+        return json.contents; 
+        
+    } catch (error) {
+        console.error("APIデータの取得中にエラーが発生しました:", error);
+        return []; // エラー時は空の配列を返す
+    }
+}
 
 // 全ニュースをHTML要素に挿入する機能
-function displayAllNews() {
+async function displayAllNews() {
     const newsListElement = document.getElementById('news-list-full');
     if (!newsListElement) return;
+    
+    // 仮のデータではなく、APIからデータを取得
+    const allNewsData = await fetchAllNews(); 
 
-    // ★★★ 制限をかけず、全てのニュースデータを表示 ★★★
+    // ニュースデータを一つずつ処理し、HTMLを生成 (ここは以前と同じ)
     allNewsData.forEach(news => {
         const listItem = document.createElement('li');
         listItem.classList.add('news-item'); 
-
-        // 詳細ページへのリンク（idを渡す）
+        
+        // CMSのデータにはIDが含まれます
         listItem.innerHTML = `
             <span class="news-date">${news.date}</span>
             <span class="news-category">[${news.category}]</span> 
@@ -33,5 +52,4 @@ function displayAllNews() {
     });
 }
 
-// ページが完全に読み込まれたらニュースを表示する関数を実行
 window.onload = displayAllNews;
