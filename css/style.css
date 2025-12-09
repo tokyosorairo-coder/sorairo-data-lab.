@@ -104,3 +104,45 @@ body {
     /* ★★★ ここを追加/修正 ★★★ */
     text-align: center;
 }
+
+/* 記事詳細ページの設定 */
+.article-main {
+    padding: 80px 0; /* 上下に余白 */
+}
+
+/* タイトル */
+.article-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 15px;
+}
+
+/* 日付・カテゴリ */
+.article-meta {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+}
+.article-meta .article-category {
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-left: 10px;
+}
+
+/* 記事本文 */
+.article-body {
+    line-height: 1.8;
+    font-size: 16px;
+}
+.article-body p {
+    margin-bottom: 20px;
+}
+
+/* 戻るリンク */
+.back-link {
+    margin-top: 60px;
+    font-size: 16px;
+}
