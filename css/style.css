@@ -115,4 +115,6 @@ body {
 .footer {
     padding: 40px 0;
     font-size: 14px;
+    /* ★★★ ここを追加/修正 ★★★ */
+    text-align: center;
 }
