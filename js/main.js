@@ -1,3 +1,17 @@
+// 日付と時間の文字列を受け取り、「YYYY.MM.DD」形式に変換する関数
+function formatMicroCmsDate(dateString) {
+    if (!dateString) return '';
+    
+    // Dateオブジェクトを作成
+    const date = new Date(dateString);
+
+    // 日本時間（JST）で年月日を取得（これで時差が解消される）
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // 月は0から始まるため+1
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}.${month}.${day}`;
+}
 // MicroCMSとの連携に必要な設定
 const SERVICE_ID = 'sdltokyo'; 
 const API_KEY = 'ezNTmjVFsUfBTMKo6uu6c25lRhvRQ0QaD9vO';
