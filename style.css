@@ -1,61 +1,81 @@
+/* フォント設定 */
 body {
   margin: 0;
   font-family: 'Zen Kaku Gothic New', sans-serif;
-  background: #f4faff;
-  color: #222;
-}
-
-/* ヘッダー */
-.site-header {
   background: #ffffff;
-  border-bottom: 1px solid #ddd;
-  padding: 16px 24px;
-}
-
-.logo {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-/* セクションの基本 */
-.section-main {
-  padding: 40px 0;
+  color: #333;
 }
 
 .container {
-  max-width: 960px;
+  width: 90%;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 16px;
 }
 
-/* タブ */
-.tabs {
-  list-style: none;
-  padding: 0;
+/* ヘッダー */
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.nav a {
+  margin-left: 24px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.header .container {
   display: flex;
-  gap: 16px;
-  margin-top: 24px;
-  border-bottom: 1px solid #ccc;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.tabs a {
-  padding: 8px 12px;
-  cursor: pointer;
-  border-bottom: 3px solid transparent;
+/* ヒーローエリア */
+.hero {
+  background: linear-gradient(to bottom right, #d6edff, #b0d6ff);
+  padding: 120px 0;
+  text-align: center;
 }
 
-.tabs a.currentTab {
-  border-bottom-color: #0077ff;
-  font-weight: 700;
+.hero-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 56px;
+  margin: 0;
 }
 
-/* コンテンツ非表示 */
-.tabContent {
-  display: none;
-  margin-top: 16px;
+.hero-sub {
+  font-size: 18px;
+  opacity: 0.8;
 }
 
-.tabContent.active {
-  display: block;
+/* NEWS */
+.section-title {
+  font-size: 28px;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+.news-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+
+/* フッター */
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  color: #555;
+  font-family: 'Inter', sans-serif;
 }
