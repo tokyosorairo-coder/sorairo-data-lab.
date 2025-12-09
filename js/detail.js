@@ -38,9 +38,18 @@ function renderArticle(data) {
     const container = document.getElementById('article-container');
     if (!container) return;
 
-    // ★★★ カテゴリ名の安全な取得：data.category.category を使用し、無ければ「未分類」★★★
-    // これにより [undefined] の表示を防ぎます。
-    const categoryName = data.category?.category || '未分類'; 
+    // ★★★ 修正する行：3つのキーを順番にチェックし、見つからなければ「未分類」を代入 ★★★
+    const categoryObject = data.category;
+    
+    let categoryName = '未分類'; // デフォルトは「未分類」
+
+    if (categoryObject) {
+        // category, name, title のいずれかでカテゴリ名が送られてきているはずです
+        categoryName = categoryObject.category ||   
+                       categoryObject.name ||       
+                       categoryObject.title ||      
+                       '未分類';
+    }
 
     // HTMLを組み立てる
     container.innerHTML = `
@@ -50,7 +59,8 @@ function renderArticle(data) {
             <span class="article-category">[${categoryName}]</span> 
         </p>
         <div class="article-body">
-            ${data.content} </div>
+            ${data.content}
+        </div>
     `;
 
     // ページタイトルも変更
