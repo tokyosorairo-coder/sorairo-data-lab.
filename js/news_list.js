@@ -44,13 +44,33 @@ async function displayAllNews() {
                             '未分類';
         }
 
-        listItem.innerHTML = `
-            <span class="news-date">${news.date}</span>
-            <span class="news-category">[${categoryName}]</span> 
-            <span class="news-title">
-                <a href="news_detail.html?id=${news.id}">${news.title}</a>
-            </span>
-        `;
+        limitedNews.forEach(news => { 
+        const listItem = document.createElement('li');
+        listItem.classList.add('news-item'); 
+        
+        // カテゴリの安全な取得：news.category.category を使用
+        const categoryObject = news.category;
+        let categoryName = '未分類'; 
+        if (categoryObject) {
+             categoryName = categoryObject.category ||   
+                            categoryObject.name ||       
+                            categoryObject.title ||      
+                            '未分類';
+        }
+
+        const formattedDate = formatMicroCmsDate(news.date);
+
+listItem.innerHTML = `
+    <span class="news-date">${formattedDate}</span> 
+    <span class="news-category">[${categoryName}]</span> 
+    <span class="news-title">
+        <a href="news_detail.html?id=${news.id}">${news.title}</a>
+    </span>
+`;
+        
+        newsListElement.appendChild(listItem);
+    });
+}
         
         newsListElement.appendChild(listItem);
     });
