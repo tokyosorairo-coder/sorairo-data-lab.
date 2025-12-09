@@ -19,24 +19,11 @@ body {
     padding: 24px 0; /* 上下のパディングのみ。左右はコンテナに任せる */
 }
 
-/* ロゴとナビゲーションを左右に並べる */
+/* ロゴとナビゲーションを左右に並べる（header-innerにFlexを適用） */
 .header-inner {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-}
-
-/* ナビゲーションリスト内の項目（li）を横並びにする */
-.nav-list {
-    display: flex; 
-    list-style: none; 
-    margin: 0;
-    padding: 0;
-}
-
-/* 各ナビゲーション項目間に間隔を設定 */
-.nav-item {
-    margin-left: 32px; 
+    justify-content: space-between; /* 左右に配置 */
+    align-items: center; /* 垂直方向の中央揃え */
 }
 
 .logo {
@@ -44,21 +31,28 @@ body {
     font-weight: 900;
 }
 
-/* ナビゲーション全体 (News, Data, About, Contactを囲む要素) */
+/* ナビゲーション全体 (nav) - 今回はulで横並びを行うため、display:flexは不要 */
 .nav {
-    /* リンクを横並びにする */
-    display: flex; 
-    
-    /* 必要に応じて、ナビゲーションリストの初期設定のマージンやパディングをリセット */
+    /* HTMLで class="nav" を追加したため、ここに設定が可能 */
     margin: 0;
     padding: 0;
-    
-    /* 要素間のスペースを均等に広げる場合 */
-    /* justify-content: space-between; */ 
 }
-/* ナビゲーションのリンク */
-.nav a {
-    margin-left: 32px;
+
+/* ナビゲーションリスト内の項目（li）を横並びにする（横並びの鍵） */
+.nav-list {
+    display: flex; /* ★ li.nav-item を横並びにする ★ */
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+}
+
+/* 各ナビゲーション項目間に間隔を設定 */
+.nav-item {
+    margin-left: 32px; /* ★ li ごとに間隔を設定 ★ */
+}
+
+/* ナビゲーションのリンクの基本スタイル */
+.nav-link {
     font-size: 16px;
     font-weight: 500;
     text-decoration: none;
@@ -71,22 +65,23 @@ body {
 }
 
 /* 1. 現在のページ（active）は太字の強調のみにする */
-.nav a.active {
+.nav-link.active {
     font-weight: 700; 
 }
 
-/* 2. ★★★ カーソルを合わせたとき（ホバー時）にバーを表示 ★★★ */
-.nav a:hover {
-    color: #4a4a4a; /* ホバー時にテキストの色を濃くするなどの効果も追加可能 */
-    border-bottom: 2px solid #4a4a4a; /* ★ バー（下線）をホバー時のみ表示 ★ */
+/* 2. カーソルを合わせたとき（ホバー時）にバーを表示 */
+.nav-link:hover {
+    color: #4a4a4a;
+    border-bottom: 2px solid #4a4a4a;
 }
+
 
 /* ▼ メインビジュアル */
 .hero {
     width: 100%;
     height: 400px;
     background: linear-gradient(#c8e3ff, #a9d2ff); 
-    position: relative; /* 要素Aの絶対配置の基準 */
+    position: relative; 
 }
 
 /* ▼ Newsエリア */
@@ -143,7 +138,6 @@ body {
 .footer {
     padding: 40px 0;
     font-size: 14px;
-    /* ★★★ ここを追加/修正 ★★★ */
     text-align: center;
 }
 
