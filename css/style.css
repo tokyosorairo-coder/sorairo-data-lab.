@@ -1,92 +1,118 @@
-/* 全体 */
+/* 全体設定 */
 body {
-  margin: 0;
-  font-family: 'Noto Sans JP', sans-serif;
-  color: #000;
+    margin: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #000;
 }
 
-/* ▼ ヘッダーの修正 */
+/* ★★★ 全コンテンツを中央に寄せるための仕様（最重要） ★★★ */
+.container {
+    max-width: 1200px; /* デザインのガイドライン幅 */
+    margin: 0 auto;    /* 中央寄せの魔法の言葉 */
+    padding: 0 48px;   /* 画面端の余白 */
+}
+
+/* ▼ ヘッダー */
 .header {
-  width: 100%;
-  background: #fff;
-  /* ★ 左右のパディングを削除！ 上下のパディングは残す ★ */
-  padding: 24px 0; 
+    width: 100%;
+    background: #fff;
+    padding: 24px 0; /* 上下のパディングのみ。左右はコンテナに任せる */
 }
 
-/* ★★★ 新規追加：ヘッダーの中身（.header-inner）の設定 ★★★ */
+/* ヘッダーの中身の配置（ロゴとナビの分離） */
 .header-inner {
-  /* ニュース欄と同じように、最大幅と中央寄せを設定します */
-  max-width: 1200px; /* デザインに合わせた最大幅 */
-  margin: 0 auto;    /* 中央寄せ */
-  padding: 0 48px;   /* 左右の余白（ロゴとナビを画面端から離す） */
-  
-  /* Flexboxの設定は.header-innerに移動します */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between; /* 左右に離す */
+    align-items: center;
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: 900;
+    font-size: 28px;
+    font-weight: 900;
 }
 
 .nav a {
-  margin-left: 32px;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none;
-  color: #000;
+    margin-left: 32px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #000;
 }
 
 /* ▼ メインビジュアル */
 .hero {
-  width: 100%;
-  height: 400px;
-  background: linear-gradient(#c8e3ff, #a9d2ff);
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(#c8e3ff, #a9d2ff); 
+    position: relative; /* 要素Aの絶対配置の基準 */
 }
 
-/* ▼ News */
+/* 要素Aの配置 */
+.element-a {
+    position: absolute;
+    right: 48px; /* コンテナの右側のパディングに揃える */
+    bottom: 0;   /* ヒーローエリアの下端に配置 */
+    width: 120px;
+    height: 120px;
+    background: #4a4a4a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+/* ▼ Newsエリア */
 .news {
-  padding: 80px 48px;
-  max-width: 900px;
-  margin: 0 auto;
+    padding: 80px 0; /* 上下のパディングのみ。左右はコンテナに任せる */
 }
 
-.news h2 {
-  font-size: 36px;
-  font-weight: 900;
-  margin-bottom: 40px;
+.news-inner h2 {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 40px;
 }
 
+.news ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ニュースアイテムの横並びと区切り線 */
 .news-item {
-  border-bottom: 1px solid #ddd;
-  padding: 20px 0;
+    display: flex; /* 横並びにする */
+    border-bottom: 1px solid #ddd;
+    padding: 16px 0;
+    font-size: 18px;
 }
 
-.news-meta {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
+.news-date {
+    width: 150px; 
+    flex-shrink: 0; 
+    color: #666;
+    font-size: 14px;
+}
+
+.news-category {
+    margin-right: 20px;
+    font-weight: 700;
+    color: #4a4a4a;
+    flex-shrink: 0; 
 }
 
 .news-title {
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.6;
+    flex-grow: 1; /* 残りのスペースを使う */
 }
 
 .news-title a {
-  color: #000;
-  text-decoration: none;
-}
-
-.news-title a:hover {
-  text-decoration: underline;
+    color: #000;
+    text-decoration: none;
 }
 
 /* ▼ フッター */
 .footer {
-  padding: 40px 48px;
-  font-size: 14px;
+    padding: 40px 0;
+    font-size: 14px;
 }
