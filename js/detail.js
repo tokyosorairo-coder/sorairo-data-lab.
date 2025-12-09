@@ -38,7 +38,7 @@ function renderArticle(data) {
     if (!container) return;
 
     // カテゴリ名を取り出す処理 (修正済み)
-    const categoryName = data.category ? data.category.name : '未分類';
+    const categoryName = data.category ? data.category.category : '未分類';
 
     container.innerHTML = `
         <h1 class="article-title">${data.title}</h1>
