@@ -2,57 +2,32 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Sorairo Data Lab.</title>
-
-  <link rel="stylesheet" href="style.css">
+  <title>出演データ - Sorairo Data Lab.</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ▼ ヘッダー -->
-  <header class="site-header">
-    <div class="logo-area">
-      <!-- ← ここにも必ずドット入れるニダ -->
-      <h1 class="logo">Sorairo Data Lab.</h1>
-    </div>
-  </header>
+<h1>出演データ</h1>
 
-  <!-- ▼ メイン -->
-  <main>
+<select id="memberSelect"></select>
 
-    <section class="section-main">
-      <div class="container">
+<div id="mainStats">
+  <div>選抜回数：<span id="senbatsuCount"></span></div>
+  <div>出演回数：<span id="stageCount"></span></div>
+  <div>ブログ更新数：<span id="blogCount"></span></div>
+</div>
 
-        <div class="select-area">
-          <label>メンバー：</label>
-          <select id="memberSelect"></select>
-        </div>
+<ul class="tabs">
+  <li><a class="currentTab" data-tab="#tabOverview">概要</a></li>
+  <li><a data-tab="#tabHistory">出演履歴</a></li>
+  <li><a data-tab="#tabBlog">ブログ</a></li>
+</ul>
 
-        <div id="mainStats" class="stats-box">
-          <div>選抜回数：<span id="senbatsuCount"></span></div>
-          <div>出演回数：<span id="stageCount"></span></div>
-          <div>ブログ更新数：<span id="blogCount"></span></div>
-        </div>
+<!-- タブ内容 -->
+<div id="tabOverview" class="tabContent active">概要エリア</div>
+<div id="tabHistory" class="tabContent">出演データ</div>
+<div id="tabBlog" class="tabContent">ブログ関連</div>
 
-        <ul class="tabs">
-          <li><a class="currentTab" data-tab="#tabOverview">概要</a></li>
-          <li><a data-tab="#tabHistory">出演履歴</a></li>
-          <li><a data-tab="#tabBlog">ブログ</a></li>
-        </ul>
-
-        <div id="tabOverview" class="tabContent active">概要エリア</div>
-        <div id="tabHistory" class="tabContent">出演データ</div>
-        <div id="tabBlog" class="tabContent">ブログ関連</div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ▼ フッター -->
-  <footer class="site-footer">
-    © Sorairo Data Lab.
-  </footer>
-
-  <script src="script.js"></script>
+<script src="js/data.js"></script>
 </body>
 </html>
