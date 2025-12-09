@@ -49,15 +49,15 @@ body {
 
 /* ▼ Newsエリア */
 .news {
-    padding-top: 10px; 
-    padding-bottom: 10px; 
+    padding-top: 20px; 
+    padding-bottom: 20px; 
 }
 
 .news-inner h2 {
     font-size: 32px;
     font-weight: 800;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .news ul {
