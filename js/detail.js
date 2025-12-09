@@ -1,6 +1,6 @@
 // MicroCMSとの連携に必要な設定 (list.jsと同じ)
-const SERVICE_ID = 'your-service-id'; 
-const API_KEY = 'YOUR_API_KEY_HERE';
+const SERVICE_ID = 'sdltokyo'; 
+const API_KEY = 'ezNTmjVFsUfBTMKo6uu6c25lRhvRQ0QaD9vO';
 const BASE_ENDPOINT = `https://${SERVICE_ID}.microcms.io/api/v1/news`;
 
 // URLから記事ID（例: ?id=abc12345）を取得する
