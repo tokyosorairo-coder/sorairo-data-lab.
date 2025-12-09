@@ -38,24 +38,41 @@ body {
 
 /* ▼ News */
 .news {
-  padding: 60px 48px;
+  padding: 80px 48px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .news h2 {
   font-size: 36px;
-  margin-bottom: 24px;
   font-weight: 900;
+  margin-bottom: 40px;
 }
 
-.news ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.news-item {
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
 }
 
-.news li {
-  font-size: 24px;
-  margin-bottom: 12px;
+.news-meta {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.news-title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.news-title a {
+  color: #000;
+  text-decoration: none;
+}
+
+.news-title a:hover {
+  text-decoration: underline;
 }
 
 /* ▼ フッター */
