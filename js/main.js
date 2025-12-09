@@ -61,13 +61,15 @@ async function displayNews() {
                             '未分類';
         }
 
-        listItem.innerHTML = `
-            <span class="news-date">${news.date}</span>
-            <span class="news-category">[${categoryName}]</span> 
-            <span class="news-title">
-                <a href="news_detail.html?id=${news.id}">${news.title}</a>
-            </span>
-        `;
+        const formattedDate = formatMicroCmsDate(news.date);
+
+listItem.innerHTML = `
+    <span class="news-date">${formattedDate}</span> 
+    <span class="news-category">[${categoryName}]</span> 
+    <span class="news-title">
+        <a href="news_detail.html?id=${news.id}">${news.title}</a>
+    </span>
+`;
         
         newsListElement.appendChild(listItem);
     });
