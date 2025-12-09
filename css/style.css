@@ -19,11 +19,24 @@ body {
     padding: 24px 0; /* 上下のパディングのみ。左右はコンテナに任せる */
 }
 
-/* ヘッダーの中身の配置（ロゴとナビの分離） */
+/* ロゴとナビゲーションを左右に並べる */
 .header-inner {
     display: flex;
-    justify-content: space-between; /* 左右に離す */
-    align-items: center;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+/* ナビゲーションリスト内の項目（li）を横並びにする */
+.nav-list {
+    display: flex; 
+    list-style: none; 
+    margin: 0;
+    padding: 0;
+}
+
+/* 各ナビゲーション項目間に間隔を設定 */
+.nav-item {
+    margin-left: 32px; 
 }
 
 .logo {
