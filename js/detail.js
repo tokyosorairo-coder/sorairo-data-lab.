@@ -37,7 +37,10 @@ async function fetchArticleData(articleId) {
 function renderArticle(data) {
     const container = document.getElementById('article-container');
     if (!container) return;
-
+    
+    // ★★★ formatMicroCmsDate 関数を使用して日付を変換 ★★★
+    const formattedDate = formatMicroCmsDate(data.date);
+    
     // ★★★ 修正する行：3つのキーを順番にチェックし、見つからなければ「未分類」を代入 ★★★
     const categoryObject = data.category;
     
@@ -55,7 +58,7 @@ function renderArticle(data) {
     container.innerHTML = `
         <h1 class="article-title">${data.title}</h1>
         <p class="article-meta">
-            <span class="article-date">${data.date}</span>
+            <span class="article-date">${formattedDate}</span> 
             <span class="article-category">[${categoryName}]</span> 
         </p>
         <div class="article-body">
