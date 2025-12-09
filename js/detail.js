@@ -1,19 +1,19 @@
-// MicroCMSとの連携に必要な設定 (list.jsと同じ)
+// MicroCMSとの連携に必要な設定 (リストページと共通)
 const SERVICE_ID = 'sdltokyo'; 
 const API_KEY = 'ezNTmjVFsUfBTMKo6uu6c25lRhvRQ0QaD9vO';
 const BASE_ENDPOINT = `https://${SERVICE_ID}.microcms.io/api/v1/news`;
 
-// URLから記事ID（例: ?id=abc12345）を取得する
+// URLから記事IDを取得する
 function getArticleIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    return params.get('id'); // URLから id の値を取得
+    return params.get('id'); 
 }
 
-// 特定の記事IDの記事データをAPIから取得する関数
+// 特定の記事データをAPIから取得する関数
 async function fetchArticleData(articleId) {
     if (!articleId) return null;
 
-    const ENDPOINT = `${BASE_ENDPOINT}/${articleId}`; // 特定の記事のエンドポイントを構築
+    const ENDPOINT = `${BASE_ENDPOINT}/${articleId}`; 
 
     try {
         const response = await fetch(ENDPOINT, {
@@ -33,13 +33,13 @@ async function fetchArticleData(articleId) {
     }
 }
 
+// 記事データをHTMLにレンダリングする関数
 function renderArticle(data) {
     const container = document.getElementById('article-container');
     if (!container) return;
 
-    // ★★★ カテゴリ名取得のロジックを修正 ★★★
-    // 1. data.category や data.category.category が存在するか安全にチェック (?. を使用)
-    // 2. 存在しない場合は必ず「未分類」を返す (|| '未分類' を使用)
+    // ★★★ カテゴリ名の安全な取得：data.category.category を使用し、無ければ「未分類」★★★
+    // これにより [undefined] の表示を防ぎます。
     const categoryName = data.category?.category || '未分類'; 
 
     // HTMLを組み立てる
@@ -47,31 +47,24 @@ function renderArticle(data) {
         <h1 class="article-title">${data.title}</h1>
         <p class="article-meta">
             <span class="article-date">${data.date}</span>
-            <span class="article-category">[${categoryName}]</span>  
+            <span class="article-category">[${categoryName}]</span> 
         </p>
         <div class="article-body">
-            ${data.content}
-        </div>
+            ${data.content} </div>
     `;
 
     // ページタイトルも変更
     document.title = `${data.title} | Sorairo Data Lab.`;
 }
 
-// ※ ページ読み込み時に実行される部分は省略しています
-
 // ページ読み込み時に実行
 window.onload = async function() {
-    // URLからIDを取得
     const articleId = getArticleIdFromUrl(); 
-    
-    // APIからデータを取得
     const article = await fetchArticleData(articleId);
     
     if (article) {
         renderArticle(article);
     } else {
-        // 記事が見つからなかった場合の処理
         document.getElementById('article-container').innerHTML = '記事が見つかりませんでした。';
     }
 };
