@@ -33,23 +33,22 @@ async function fetchArticleData(articleId) {
     }
 }
 
-// 記事データをHTMLにレンダリングする関数 (ここは以前と同じ)
 function renderArticle(data) {
     const container = document.getElementById('article-container');
     if (!container) return;
 
-    // タイトル、メタ情報、本文のHTMLを組み立てる
+    // カテゴリ名を取り出す処理 (修正済み)
+    const categoryName = data.category ? data.category.name : '未分類';
+
     container.innerHTML = `
         <h1 class="article-title">${data.title}</h1>
         <p class="article-meta">
             <span class="article-date">${data.date}</span>
-            <span class="article-category">[${data.category}]</span>
-        </p>
+            <span class="article-category">[${categoryName}]</span> </p>
         <div class="article-body">
             ${data.content}
         </div>
     `;
-
     // ページタイトルも変更
     document.title = `${data.title} | Sorairo Data Lab.`;
 }
